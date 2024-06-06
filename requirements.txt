@@ -1,4 +1,5 @@
 pandas
+appdirs
 plotly
 streamlit
 yfinance
