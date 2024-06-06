@@ -37,7 +37,7 @@ interval = st.selectbox(
 
 # Fetch historical data for the selected company
 data = {}
-stock_data = yf.download(tickers[company], period=period, interval=interval,progress='false')[['Open', 'Close']].tail(600)
+stock_data = yf.download(tickers[company], period=period, interval=interval)[['Open', 'Close']].tail(600)
 data[company] = stock_data
 
 # Convert the data to a DataFrame for better visualization
