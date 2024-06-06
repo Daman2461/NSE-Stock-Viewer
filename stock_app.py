@@ -61,3 +61,5 @@ fig.update_layout(title=f'{company} Closing Prices',
  
 st.plotly_chart(fig)
 st.dataframe(df[company])
+
+st.write("Made by Daman")
