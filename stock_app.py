@@ -20,7 +20,12 @@ tickers = {
 
 st.title('Stock App')
 
-company = st.text_input("Enter Name", "Nifty 50")
+company =  st.selectbox(
+   "Company",
+   ("Nifty 50","Reliance Industries","Tata Consultancy Services (TCS)", "HDFC Bank", "ICICI Bank", "Tata Steel","Infosys"),
+   index=0,
+   key='company'
+)
 
 period = st.selectbox(
    "Period",
