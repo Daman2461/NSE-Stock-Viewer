@@ -42,7 +42,7 @@ with st.sidebar:
     company =  st.selectbox(
    "Company",
    ("Nifty 50","Reliance Industries","Tata Consultancy Services (TCS)", "HDFC Bank", "ICICI Bank", "Tata Steel","Infosys"),
-   index=int(random.random()*len(tickers)),
+   index=6,
    key='company'
     )
 
