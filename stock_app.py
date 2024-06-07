@@ -51,13 +51,13 @@ df.columns = pd.MultiIndex.from_product([[company], ['Open', 'Close']], names=['
 
 # Plot the selected company data with Plotly
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=df.index, y=df[company]['Open'], mode='lines', name=f'{company} Opening Prices'))
-fig.update_layout(title=f'{company} Opening Prices',
+fig.add_trace(go.Scatter(x=df.index, y=df[company]['Open'], mode='lines', name='Opening Prices'))
+fig.update_layout(title= 'Opening Prices',
                   xaxis_title='Date',
                   yaxis_title='Price',
                   width=800, height=500)
-fig.add_trace(go.Scatter(x=df.index, y=df[company]['Close'], mode='lines', name=f'{company} Closing Prices'))
-fig.update_layout(title=f'{company} Closing Prices',
+fig.add_trace(go.Scatter(x=df.index, y=df[company]['Close'], mode='lines', name='Closing Prices'))
+fig.update_layout(title='Closing Prices',
                   xaxis_title='Date',
                   yaxis_title='Price',
                   width=800, height=500)
