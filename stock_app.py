@@ -61,7 +61,8 @@ fig.update_layout(
                   xaxis_title='Date',
                   yaxis_title='Price',
                   width=800, height=500)
-fig.update_layout(xaxis_showgrid=True, yaxis_showgrid=True)
+fig.update_layout(xaxis_showgrid=True, yaxis_showgrid=True,'hovermode': 'closest',
+        'xaxis': {'showspikes': True})
 # Display the graph and the dataframe in the same row
 
 col1,col2=st.columns([0.3,0.7])
