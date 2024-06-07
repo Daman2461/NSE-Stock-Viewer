@@ -3,7 +3,7 @@ import pandas as pd
 
 import appdirs as ad
 ad.user_cache_dir = lambda *args: "/tmp"
-
+import random
 import yfinance as yf
 import plotly.graph_objs as go
 
@@ -24,17 +24,29 @@ tickers = {
     "ICICI Bank": "ICICIBANK.NS",
     "Tata Steel": "TATASTEEL.NS"
 }
-
+valid_intervals = {
+    '1d': ['1m', '2m', '5m', '15m', '30m', '60m', '90m', '1h'],
+    '5d': ['5m', '15m', '30m', '60m', '90m', '1h'],
+    '1mo': ['1h', '1d'],
+    '3mo': ['1d', '5d'],
+    '6mo': ['1d', '5d', '1wk'],
+    '1y': ['1d', '5d', '1wk', '1mo'],
+    '2y': ['1d', '5d', '1wk', '1mo'],
+    '5y': ['1d', '5d', '1wk', '1mo', '3mo'],
+    '10y': ['1d', '5d', '1wk', '1mo', '3mo'],
+    'ytd': ['1d', '5d', '1wk', '1mo'],
+    'max': ['1d', '5d', '1wk', '1mo', '3mo']
+}
 st.title('Stock App')
 with st.sidebar:
     company =  st.selectbox(
    "Company",
    ("Nifty 50","Reliance Industries","Tata Consultancy Services (TCS)", "HDFC Bank", "ICICI Bank", "Tata Steel","Infosys"),
-   index=0,
+   index=int(random.random()*len(tickers)),
    key='company'
     )
 
-    period = st.radio(
+    period = st.selectbox(
     "Period",
     options=['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'],
     index=2,
@@ -46,7 +58,8 @@ with st.sidebar:
    index=8,
    key='interval'
     )
-
+if interval not in valid_intervals[period]:
+     interval = valid_intervals[period][-1]
 # Fetch historical data for the selected company
 data = {}
 stock_data = yf.download(tickers[company], period=period, interval=interval,progress=False)[['Open', 'Close']].tail(600)
