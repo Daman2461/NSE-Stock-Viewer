@@ -19,26 +19,26 @@ tickers = {
 }
 
 st.title('Stock App')
-
-company =  st.selectbox(
+with st.sidebar:
+    company =  st.selectbox(
    "Company",
    ("Nifty 50","Reliance Industries","Tata Consultancy Services (TCS)", "HDFC Bank", "ICICI Bank", "Tata Steel","Infosys"),
    index=0,
    key='company'
-)
+    )
 
-period = st.selectbox(
+    period = st.selectbox(
    "Period",
    ('1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'),
    index=2,
    key='period'
-)
-interval = st.selectbox(
+    )
+    interval = st.selectbox(
    "Interval",
    ('1m', '2m','5m', '15m', '30m', '60m', '90m', '1h', '1d', '5d', '1wk', '1mo', '3mo'),
    index=8,
    key='interval'
-)
+    )
 
 # Fetch historical data for the selected company
 data = {}
