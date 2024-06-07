@@ -71,11 +71,10 @@ fig.update_layout(
 
 # Display the graph and the dataframe in the same row
 
-col1,col2=st.columns((1,3))
-with col1:
-    st.dataframe(df[company],use_container_width=True)
-with col2:
-    
-    st.plotly_chart(fig)
+ 
+ 
+st.dataframe(df[company],use_container_width=True)
+ 
+st.plotly_chart(fig)
 
 st.write("Made by Daman")
