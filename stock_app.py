@@ -64,7 +64,7 @@ fig.update_layout(title=f'{company} Closing Prices',
 fig.update_layout(xaxis_showgrid=True, yaxis_showgrid=True)
 # Display the graph and the dataframe in the same row
 
-col1,col2=st.columns(2):
+col1,col2=st.columns(2)
 with col1:
     st.plotly_chart(fig)
 with col2:
