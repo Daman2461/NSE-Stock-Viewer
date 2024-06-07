@@ -64,7 +64,7 @@ fig.update_layout(title='Closing Prices',
 fig.update_layout(xaxis_showgrid=True, yaxis_showgrid=True)
 # Display the graph and the dataframe in the same row
 
-col1,col2=st.columns(2)
+col1,col2=st.columns([0.3,0.7])
 with col1:
     st.dataframe(df[company])
 with col2:
