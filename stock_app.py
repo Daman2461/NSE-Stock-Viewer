@@ -8,8 +8,8 @@ import yfinance as yf
 import plotly.graph_objs as go
 
 st.set_page_config(
-    page_title="Ex-stream-ly Cool App",
-    page_icon="🧊",
+    page_title="NSE Stock Viewer",
+    page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"
 )
