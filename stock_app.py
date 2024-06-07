@@ -63,8 +63,11 @@ fig.update_layout(title=f'{company} Closing Prices',
                   width=800, height=500)
 fig.update_layout(xaxis_showgrid=True, yaxis_showgrid=True)
 # Display the graph and the dataframe in the same row
- 
-st.plotly_chart(fig)
-st.dataframe(df[company])
+
+col1,col2=st.columns(2):
+with col1:
+    st.plotly_chart(fig)
+with col2:
+    st.dataframe(df[company])
 
 st.write("Made by Daman")
