@@ -56,7 +56,11 @@ fig.update_layout(title=f'{company} Closing Prices',
                   xaxis_title='Date',
                   yaxis_title='Price',
                   width=700, height=500)
-
+fig.add_trace(go.Scatter(x=df.index, y=df[company]['Open'], mode='lines', name=f'{company} Opening Prices'))
+fig.update_layout(title=f'{company} Opening Prices',
+                  xaxis_title='Date',
+                  yaxis_title='Price',
+                  width=700, height=500)
 # Display the graph and the dataframe in the same row
  
 st.plotly_chart(fig)
