@@ -71,7 +71,7 @@ fig.update_layout(
 
 # Display the graph and the dataframe in the same row
 
-col1,col2=st.columns([0.3,0.7])
+col1,col2=st.beta_columns([0.3,0.7])
 with col1:
     st.dataframe(df[company],use_container_width=True)
 with col2:
