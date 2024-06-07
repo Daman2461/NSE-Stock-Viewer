@@ -73,7 +73,7 @@ fig.update_layout(
 
 col1,col2=st.columns([0.3,0.7])
 with col1:
-    st.table(df[company],use_container_width=True)
+    st.dataframe(df[company],use_container_width=True)
 with col2:
     
     st.plotly_chart(fig)
