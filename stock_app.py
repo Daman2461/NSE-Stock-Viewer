@@ -65,7 +65,7 @@ fig.update_layout(
     height=500,
     xaxis_showgrid=True,
     yaxis_showgrid=True,
-    hovermode='closest',
+    hovermode='x',
     xaxis={'showspikes': True}
 )
 
