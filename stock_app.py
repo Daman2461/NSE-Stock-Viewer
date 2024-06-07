@@ -6,7 +6,14 @@ ad.user_cache_dir = lambda *args: "/tmp"
 
 import yfinance as yf
 import plotly.graph_objs as go
-st.set_page_config(layout="wide")
+
+st.set_page_config(
+    page_title="Ex-stream-ly Cool App",
+    page_icon="🧊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # Define the ticker symbols for the selected Nifty 50 companies
 tickers = {
     "Nifty 50": "^NSEI",
