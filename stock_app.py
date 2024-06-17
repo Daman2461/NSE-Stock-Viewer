@@ -93,6 +93,29 @@ fig.update_layout(
 
  
 st.plotly_chart(fig)
+fig = go.Figure()
+fig.add_trace(go.Candlestick(x=df.index,high=df[company]['High'],low=df[company]['Low'], open=df[company]['Open'], close=df[company]['Close'] ))
+fig.update_layout( 
+                  xaxis_title='Date',
+                  yaxis_title='Price',
+                  width=800, height=500)
+ 
+fig.update_layout(
+    title=f'{company} Stock Prices',
+    xaxis_title='Date',
+    yaxis_title='Price',
+    width=800,
+    height=500,
+    xaxis_showgrid=True,
+    yaxis_showgrid=True,
+    hovermode='x',
+    xaxis={'showspikes': True}
+)
+
+# Display the graph and the dataframe in the same row
+
+ 
+st.plotly_chart(fig)
 st.dataframe(df[company],use_container_width=True)
  
 
