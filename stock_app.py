@@ -97,4 +97,4 @@ st.dataframe(df[company],use_container_width=True)
  
 
 
-st.write("Made by Daman")
+st.write("Made by Damanjit Singh")
