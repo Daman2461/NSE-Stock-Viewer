@@ -130,7 +130,7 @@ fig_loess = go.Figure()
 fig_loess.add_trace(go.Scatter(x=df.index, y=y, mode='lines', name="Closing Price", line=dict(color='blue')))
 
 # Add the LOESS smoothed line
-fig_loess.add_trace(go.Scatter(x=df.index, y=smoothed_y, mode='lines', name="LOESS Smoothed", line=dict(color='orange', width=3)))
+fig_loess.add_trace(go.Scatter(x=df.index, y=smoothed_y, mode='lines', name="Cascading Smoothed", line=dict(color='red', width=3)))
 
 fig_loess.update_layout(
     title=f'{company} Closing Price with LOESS Smoothing',
@@ -142,8 +142,7 @@ fig_loess.update_layout(
     yaxis_showgrid=True,
     hovermode='x'
 )
-
-# Display the LOESS smoothed chart below the candlestick chart
+ 
 st.plotly_chart(fig_loess)
 
 st.write("Made by Daman")
