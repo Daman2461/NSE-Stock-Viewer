@@ -121,7 +121,7 @@ y = df[company]['Close'].values
 x = np.arange(len(df))  # Numerical representation of dates
 
 # Apply LOESS smoothing
-smoothed_y = loess_smoothing(y, x, frac=0.2)
+smoothed_y = loess_smoothing(y, x, frac=0.02)
 
 # Plot LOESS smoothed line
 fig_loess = go.Figure()
