@@ -27,6 +27,8 @@ tickers = {
     "ICICI Bank": "ICICIBANK.NS",
     "Tata Steel": "TATASTEEL.NS"
 }
+
+# Define valid intervals for each period
 valid_intervals = {
     '1d': ['1m', '2m', '5m', '15m', '30m', '60m', '90m', '1h'],
     '5d': ['5m', '15m', '30m', '60m', '90m', '1h'],
@@ -58,10 +60,13 @@ with st.sidebar:
         key='period'
     )
 
+    # Filter valid intervals based on the selected period
+    available_intervals = valid_intervals.get(period, [])
+    
     interval = st.selectbox(
         "Interval",
-        ('1m', '2m', '5m', '15m', '30m', '60m', '90m', '1h', '1d', '5d', '1wk', '1mo', '3mo'),
-        index=8,
+        available_intervals,
+        index=available_intervals.index('1d') if '1d' in available_intervals else 0,
         key='interval'
     )
 
@@ -142,4 +147,3 @@ fig_loess.update_layout(
 st.plotly_chart(fig_loess)
 
 st.write("Made by Daman")
-
