@@ -111,7 +111,7 @@ st.plotly_chart(fig)
 st.dataframe(df[company], use_container_width=True)
 
 # LOESS Smoothing (on Close Price)
-def loess_smoothing(y, x, frac=0.03):
+def loess_smoothing(y, x, frac=0.035):
     lowess = sm.nonparametric.lowess
     smoothed = lowess(y, x, frac=frac)
     return smoothed[:, 1]
@@ -121,7 +121,7 @@ y = df[company]['Close'].values
 x = np.arange(len(df))  # Numerical representation of dates
 
 # Apply LOESS smoothing
-smoothed_y = loess_smoothing(y, x, frac=0.03)
+smoothed_y = loess_smoothing(y, x, frac=0.035)
 
 # Plot LOESS smoothed line
 fig_loess = go.Figure()
