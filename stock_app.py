@@ -4,6 +4,8 @@ import appdirs as ad
 import random
 import yfinance as yf
 import plotly.graph_objs as go
+import statsmodels.api as sm
+import numpy as np
 
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
@@ -103,4 +105,41 @@ fig.update_layout(
 st.plotly_chart(fig)
 st.dataframe(df[company], use_container_width=True)
 
+# LOESS Smoothing (on Close Price)
+def loess_smoothing(y, x, frac=0.2):
+    lowess = sm.nonparametric.lowess
+    smoothed = lowess(y, x, frac=frac)
+    return smoothed[:, 1]
+
+# Extract the closing prices and convert dates to numerical format
+y = df[company]['Close'].values
+x = np.arange(len(df))  # Numerical representation of dates
+
+# Apply LOESS smoothing
+smoothed_y = loess_smoothing(y, x, frac=0.2)
+
+# Plot LOESS smoothed line
+fig_loess = go.Figure()
+
+# Add the original closing prices
+fig_loess.add_trace(go.Scatter(x=df.index, y=y, mode='lines', name="Closing Price", line=dict(color='blue')))
+
+# Add the LOESS smoothed line
+fig_loess.add_trace(go.Scatter(x=df.index, y=smoothed_y, mode='lines', name="LOESS Smoothed", line=dict(color='orange', width=3)))
+
+fig_loess.update_layout(
+    title=f'{company} Closing Price with LOESS Smoothing',
+    xaxis_title='Date',
+    yaxis_title='Price',
+    width=800,
+    height=500,
+    xaxis_showgrid=True,
+    yaxis_showgrid=True,
+    hovermode='x'
+)
+
+# Display the LOESS smoothed chart below the candlestick chart
+st.plotly_chart(fig_loess)
+
 st.write("Made by Daman")
+
