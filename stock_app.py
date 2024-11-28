@@ -110,8 +110,8 @@ fig.update_layout(
 st.plotly_chart(fig)
 st.dataframe(df[company], use_container_width=True)
 
-# LOESS Smoothing (on Close Price)
-def loess_smoothing(y, x, frac=0.035):
+# casc mod (on Close Price)
+def casc_mod(y, x, frac=0.035):
     lowess = sm.nonparametric.lowess
     smoothed = lowess(y, x, frac=frac)
     return smoothed[:, 1]
@@ -120,20 +120,20 @@ def loess_smoothing(y, x, frac=0.035):
 y = df[company]['Close'].values
 x = np.arange(len(df))  # Numerical representation of dates
 
-# Apply LOESS smoothing
-smoothed_y = loess_smoothing(y, x, frac=0.035)
+# Apply casc mod
+smoothed_y = casc_mod(y, x, frac=0.035)
 
-# Plot LOESS smoothed line
-fig_loess = go.Figure()
+# Plot casc smoothed line
+fig_casc = go.Figure()
 
 # Add the original closing prices
-fig_loess.add_trace(go.Scatter(x=df.index, y=y, mode='lines', name="Closing Price", line=dict(color='blue')))
+fig_casc.add_trace(go.Scatter(x=df.index, y=y, mode='lines', name="Closing Price", line=dict(color='blue')))
 
-# Add the LOESS smoothed line
-fig_loess.add_trace(go.Scatter(x=df.index, y=smoothed_y, mode='lines', name="Cascading Smoothed", line=dict(color='red', width=3)))
+# Add the casc smoothed line
+fig_casc.add_trace(go.Scatter(x=df.index, y=smoothed_y, mode='lines', name="Cascading Smoothed", line=dict(color='red', width=3)))
 
-fig_loess.update_layout(
-    title=f'{company} Closing Price with LOESS Smoothing',
+fig_casc.update_layout(
+    title=f'{company} Closing Price with Cascading Model',
     xaxis_title='Date',
     yaxis_title='Price',
     width=800,
@@ -143,6 +143,6 @@ fig_loess.update_layout(
     hovermode='x'
 )
  
-st.plotly_chart(fig_loess)
+st.plotly_chart(fig_casc)
 
 st.write("Made by Daman")
