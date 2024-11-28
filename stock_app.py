@@ -56,7 +56,7 @@ with st.sidebar:
     period = st.selectbox(
         "Period",
         options=['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'],
-        index=2,
+        index=0,
         key='period'
     )
 
