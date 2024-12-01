@@ -13,6 +13,12 @@ import joblib
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
 
+st.set_page_config(
+    page_title="NSE Stock Viewer",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 policy_model_path = "./policy/"  # Path to the saved policy model
 cascading_model_paths = {
     "level_1": "./model_level_1.joblib",
@@ -40,12 +46,6 @@ for level, model_path in cascading_model_paths.items():
     else:
         st.write(f"{level} model not found at {model_path}")
 
-st.set_page_config(
-    page_title="NSE Stock Viewer",
-    page_icon="📈",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # Define the ticker symbols for the selected Nifty 50 companies
 tickers = {
