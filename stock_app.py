@@ -26,7 +26,20 @@ cascading_model_paths = {
     "level_3": "./model_level_3.joblib"
 }
  
- 
+ def marlvol1(alpha, policy_network, value_network, np_basis_players, n_agents, max_iterations=1000):
+    for iteration in range(max_iterations):
+        basis_players = np.random.choice(range(n_agents), np_basis_players, replace=False)
+        actions = np.array([policy_network.sample_action(player) for player in basis_players])
+        interpolated_actions = np.mean(actions, axis=0)
+        sigma = np.array([value_network.compute_sigma(action) for action in interpolated_actions])
+        diffused_s = value_network.diffuse_sigma(sigma)
+        rewards = np.array([value_network.compute_reward(action) for action in diffused_s])
+        gradients = policy_network.compute_gradients(rewards, interpolated_actions)
+        policy_network.update(gradients, alpha)
+        value_network.update(rewards)
+    
+    return policy_network
+
 
 
 # Define the ticker symbols for the selected Nifty 50 companies
