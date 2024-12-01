@@ -11,6 +11,32 @@ from scipy.stats import norm
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
 
+policy_model_path = "policy/saved_model.pb"  # Path to the saved policy model
+cascading_model_paths = {
+    "level_1": "policy/model_level_1.joblib",
+    "level_2": "policy/model_level_2.joblib",
+    "level_3": "policy/model_level_3.joblib"
+}
+
+# Load the policy model (assuming it's a TensorFlow model saved as 'saved_model.pb')
+if os.path.exists(policy_model_path):
+    # Load the TensorFlow model
+    policy_model = tf.saved_model.load(policy_model_path)
+    st.write("Policy model loaded successfully!")
+else:
+    st.write(f"Policy model not found at {policy_model_path}")
+
+# Load the cascading models (assuming they are saved with joblib)
+cascading_models = {}
+
+for level, model_path in cascading_model_paths.items():
+    if os.path.exists(model_path):
+        # Load the cascading model using joblib
+        cascading_models[level] = joblib.load(model_path)
+        st.write(f"Cascading model for {level} loaded successfully!")
+    else:
+        st.write(f"{level} model not found at {model_path}")
+
 st.set_page_config(
     page_title="NSE Stock Viewer",
     page_icon="📈",
