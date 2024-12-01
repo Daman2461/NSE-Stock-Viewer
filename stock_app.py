@@ -189,5 +189,4 @@ option_type = st.selectbox("Option Type", ["call", "put"])
 option_price = marl_based_option_pricing(S, K, T, r, sigma, option_type)
 
 st.write(f"MARL-based {option_type.capitalize()} option price: ₹{option_price:.2f}")
-
-st.write("Made by Daman")
+ 
