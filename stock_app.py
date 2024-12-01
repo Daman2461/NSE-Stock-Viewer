@@ -13,7 +13,12 @@ import joblib
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
 
-
+st.set_page_config(
+    page_title="NSE Stock Viewer",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 policy_model_path = "./policy/"  # Path to the saved policy model
 cascading_model_paths = {
     "level_1": "./model_level_1.joblib",
