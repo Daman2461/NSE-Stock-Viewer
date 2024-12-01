@@ -148,10 +148,7 @@ st.plotly_chart(fig_casc)
 
 # Simulated MARL-based Option Pricing  
 def marl_based_option_pricing(S, K, T, r, sigma, option_type='call'):
-    """
-    This function simulates an option pricing agent using a MARL approach
-    but internally uses the Black-Scholes model for calculations.
-    """
+    
     # Simulate MARL agent decision process
     st.write("The MARL agent is evaluating the option pricing...")
     action = random.choice(['buy', 'sell'])  # Simulated agent decision (buy or sell)
