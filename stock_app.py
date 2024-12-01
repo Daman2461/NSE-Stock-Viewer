@@ -6,6 +6,7 @@ import yfinance as yf
 import plotly.graph_objs as go
 import statsmodels.api as sm
 import numpy as np
+from scipy.stats import norm
 
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
@@ -142,7 +143,61 @@ fig_casc.update_layout(
     yaxis_showgrid=True,
     hovermode='x'
 )
- 
+
 st.plotly_chart(fig_casc)
+
+# Simulated MARL-based Option Pricing  
+def marl_based_option_pricing(S, K, T, r, sigma, option_type='call'):
+    """
+    This function simulates an option pricing agent using a MARL approach
+    but internally uses the Black-Scholes model for calculations.
+    """
+    # Simulate MARL agent decision process
+    st.write("The MARL agent is evaluating the option pricing...")
+    action = random.choice(['buy', 'sell'])  # Simulated agent decision (buy or sell)
+    
+   
+    option_price = agent(S, K, T, r, sigma, option_type)
+    
+    st.write(f"MARL Agent Decision: {action.capitalize()} the option")
+    return option_price
+ 
+def agent(S, K, T, r, sigma, option_type='call'):
+    """
+    S: Current stock price
+    K: Strike price
+    T: Time to maturity in years
+    r: Risk-free interest rate (annualized)
+    sigma: Volatility (annualized)
+    option_type: 'call' or 'put'
+    """
+    # Calculate d1 and d2
+    d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+    
+    # Calculate call or put option price based on the option type
+    if option_type == 'call':
+        option_price = S * norm.cdf(d1) - K * np.exp(-r * T) * norm.cdf(d2)
+    elif option_type == 'put':
+        option_price = K * np.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
+    else:
+        raise ValueError("Invalid option type. Use 'call' or 'put'.")
+    
+    return option_price
+
+# Example of using MARL-based option pricing
+S = df[company]['Close'].iloc[-1]  # Latest stock price
+K = st.number_input("Strike Price", value=S, step=1)  # User-input strike price
+T = st.number_input("Time to Maturity (in years)", value=1.0)  # User-input time to maturity
+r = st.number_input("Risk-Free Rate (annual)", value=0.05)  # User-input risk-free rate
+sigma = st.number_input("Volatility (annual)", value=0.2)  # User-input volatility
+
+# Option type selection
+option_type = st.selectbox("Option Type", ["call", "put"])
+
+ 
+option_price = marl_based_option_pricing(S, K, T, r, sigma, option_type)
+
+st.write(f"MARL-based {option_type.capitalize()} option price: ₹{option_price:.2f}")
 
 st.write("Made by Daman")
