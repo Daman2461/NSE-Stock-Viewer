@@ -7,7 +7,7 @@ import plotly.graph_objs as go
 import statsmodels.api as sm
 import numpy as np
 from scipy.stats import norm
-
+import os
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
 
