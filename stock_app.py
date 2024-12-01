@@ -173,6 +173,16 @@ for level, model_path in cascading_model_paths.items():
         st.write(f"Cascading model for {level} loaded successfully!")
     else:
         st.write(f"{level} model not found at {model_path}")
+def apply_cascading_models(data, models):
+    # Start with the raw data
+    filtered_data = data
+
+    # Apply each model sequentially
+    for level, model in models.items():
+        # Assume each model is designed to process the data
+        filtered_data = model.predict(filtered_data)  # Or any suitable method
+
+    return filtered_data
 
 # Simulated MARL-based Option Pricing  
 def marl_based_option_pricing(S, K, T, r, sigma, option_type='call'):
