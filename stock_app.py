@@ -144,9 +144,8 @@ def apply_cascading_models(data, models):
 
 # casc mod (on Close Price)
 def casc_mod(y, x, frac=0.035):
-    data = df
-    models = cascading_models
-    t=apply_cascading_models(data, models)
+    
+     
     lowess = sm.nonparametric.lowess
     smoothed = lowess(y, x, frac=frac)
     return smoothed[:, 1]
