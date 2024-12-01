@@ -122,8 +122,31 @@ fig.update_layout(
 st.plotly_chart(fig)
 st.dataframe(df[company], use_container_width=True)
 
+cascading_models = {}
+
+for level, model_path in cascading_model_paths.items():
+    if os.path.exists(model_path):
+        # Load the cascading model using joblib
+        cascading_models[level] = joblib.load(model_path)
+        st.write(f"Cascading model for {level} loaded successfully!")
+    else:
+        st.write(f"{level} model not found at {model_path}")
+def apply_cascading_models(data, models):
+    # Start with the raw data
+    filtered_data = data
+
+    # Apply each model sequentially
+    for level, model in models.items():
+        # Assume each model is designed to process the data
+        filtered_data = model.predict(filtered_data)  # Or any suitable method
+
+    return filtered_data
+
 # casc mod (on Close Price)
 def casc_mod(y, x, frac=0.035):
+    data = df
+    models = cascading_models
+    apply_cascading_models(data, models)
     lowess = sm.nonparametric.lowess
     smoothed = lowess(y, x, frac=frac)
     return smoothed[:, 1]
@@ -164,25 +187,6 @@ else:
     st.write(f"Policy model not found at {policy_model_path}")
 
 # Load the cascading models (assuming they are saved with joblib)
-cascading_models = {}
-
-for level, model_path in cascading_model_paths.items():
-    if os.path.exists(model_path):
-        # Load the cascading model using joblib
-        cascading_models[level] = joblib.load(model_path)
-        st.write(f"Cascading model for {level} loaded successfully!")
-    else:
-        st.write(f"{level} model not found at {model_path}")
-def apply_cascading_models(data, models):
-    # Start with the raw data
-    filtered_data = data
-
-    # Apply each model sequentially
-    for level, model in models.items():
-        # Assume each model is designed to process the data
-        filtered_data = model.predict(filtered_data)  # Or any suitable method
-
-    return filtered_data
 
 # Simulated MARL-based Option Pricing  
 def marl_based_option_pricing(S, K, T, r, sigma, option_type='call'):
