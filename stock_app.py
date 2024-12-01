@@ -8,6 +8,7 @@ import statsmodels.api as sm
 import numpy as np
 from scipy.stats import norm
 import os
+import tensorflow as tf
 # Set up the cache directory
 ad.user_cache_dir = lambda *args: "/tmp"
 
