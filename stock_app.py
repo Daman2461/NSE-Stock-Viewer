@@ -160,14 +160,7 @@ def marl_based_option_pricing(S, K, T, r, sigma, option_type='call'):
     return option_price
  
 def agent(S, K, T, r, sigma, option_type='call'):
-    """
-    S: Current stock price
-    K: Strike price
-    T: Time to maturity in years
-    r: Risk-free interest rate (annualized)
-    sigma: Volatility (annualized)
-    option_type: 'call' or 'put'
-    """
+     
     # Calculate d1 and d2
     d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
     d2 = d1 - sigma * np.sqrt(T)
@@ -186,8 +179,8 @@ def agent(S, K, T, r, sigma, option_type='call'):
 S = float(df[company]['Close'].iloc[-1] ) # Latest stock price
 K = st.number_input("Strike Price", value=S, step=1.0)  # User-input strike price
 T = st.number_input("Time to Maturity (in years)", value=1.0)  # User-input time to maturity
-r = st.number_input("Risk-Free Rate (annual)", value=0.05)  # User-input risk-free rate
-sigma = st.number_input("Volatility (annual)", value=0.2)  # User-input volatility
+r = 0.05
+sigma = 0.2
 
 # Option type selection
 option_type = st.selectbox("Option Type", ["call", "put"])
