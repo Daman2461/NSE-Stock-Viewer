@@ -17,7 +17,8 @@ cascading_model_paths = {
     "level_2": "model_level_2.joblib",
     "level_3": "model_level_3.joblib"
 }
-
+st.write("Files in 'policy' directory:")
+st.write(os.listdir('policy'))
 # Load the policy model (assuming it's a TensorFlow model saved as 'saved_model.pb')
 if os.path.exists(policy_model_path):
     # Load the TensorFlow model
