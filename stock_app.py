@@ -13,9 +13,9 @@ ad.user_cache_dir = lambda *args: "/tmp"
 
 policy_model_path = "policy/saved_model.pb"  # Path to the saved policy model
 cascading_model_paths = {
-    "level_1": "policy/model_level_1.joblib",
-    "level_2": "policy/model_level_2.joblib",
-    "level_3": "policy/model_level_3.joblib"
+    "level_1": "model_level_1.joblib",
+    "level_2": "model_level_2.joblib",
+    "level_3": "model_level_3.joblib"
 }
 
 # Load the policy model (assuming it's a TensorFlow model saved as 'saved_model.pb')
