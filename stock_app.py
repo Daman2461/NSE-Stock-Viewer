@@ -26,7 +26,7 @@ cascading_model_paths = {
     "level_3": "./model_level_3.joblib"
 }
  
- def marlvol1(alpha, policy_network, value_network, np_basis_players, n_agents, max_iterations=1000):
+def marlvol1(alpha, policy_network, value_network, np_basis_players, n_agents, max_iterations=1000):
     for iteration in range(max_iterations):
         basis_players = np.random.choice(range(n_agents), np_basis_players, replace=False)
         actions = np.array([policy_network.sample_action(player) for player in basis_players])
