@@ -6,3 +6,4 @@ appdirs
 statsmodels
 tensorflow 
 joblib
+scikit-learn
